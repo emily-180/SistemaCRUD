@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Sistema Clube da Matematica - Adicionar</title>
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            background-color: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+            margin-top: 2rem;
+        }
+        .form-container h2 {
+            margin-bottom: 1rem;
+            color: #ffc107;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #ffc107;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
+    <script src="app.js"></script>
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <div class="sidebar-brand-icon rotate-n-15">
+                  
+                </div>
+                <div class="sidebar-brand-text mx-3">Adm Clube da Matematica<sup>2</sup></div>
+            </a>
+
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">
+                    <i class="fa-brands fa-readme"></i>
+                    <span>Visão Geral</span></a>
+            </li>
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Gerenciar
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponents" aria-expanded="true" aria-controls="collapseComponents">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Competições</span>
+                </a>
+                <div id="collapseComponents" class="collapse" aria-labelledby="headingComponents" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Funções Permitidas</h6>
+                        <a class="collapse-item" href="add-competition.html">Adicionar Competição</a>
+                        <a class="collapse-item" href="edit-competition.html">Editar Competicição</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        
+        <div id="content-wrapper" class="d-flex flex-column">
+
+
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <ul class="navbar-nav ml-auto">                
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                            
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" id="logoutButton">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Sair
+                                </a>
+                                
+                            </div>
+                        </li>
+                    </ul>
+                
+                </nav>
+             
+                <div class="container-fluid">
+                    <div class="form-container">
+                        <h2>Editar Competição</h2>
+                        <form id="updateCompetition">
+                            <div class="form-group">
+                                <label for="select-competition">Selecione uma Competição</label>
+                                <select class="form-control" id="select-competition" required>
+                                    <option value="">Selecione...</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nome">Nome da Competição</label>
+                                <input type="text" class="form-control" id="nome" disabled required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="sigla">Sigla</label>
+                                    <input type="text" class="form-control" id="sigla" disabled required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="edicao">Edição</label>
+                                    <input type="text" class="form-control" id="edicao" disabled required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="ouro">Quantidade de Menções Honrosas</label>
+                                    <input type="number" class="form-control" id="mencao" disabled required>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="prata">Quantidade de Medalhas de Participação</label>
+                                    <input type="number" class="form-control" id="participacao" disabled required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    <label for="ouro">Quantidade de Medalhas de Ouro</label>
+                                    <input type="number" class="form-control" id="ouro" disabled required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="prata">Quantidade de Medalhas de Prata</label>
+                                    <input type="number" class="form-control" id="prata" disabled required>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label for="bronze">Quantidade de Medalhas de Bronze</label>
+                                    <input type="number" class="form-control" id="bronze" disabled required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-warning" id="updateButton" disabled>Alterar Competição</button>
+                        </form>
+                    </div>
+                </div>
+               
+            </div>
+          
+        </div>
+      
+    </div>
+  
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const selectCompetition = document.getElementById('select-competition');
+            const nomeInput = document.getElementById('nome');
+            const siglaInput = document.getElementById('sigla');
+            const edicaoInput = document.getElementById('edicao');
+            const ouroInput = document.getElementById('ouro');
+            const prataInput = document.getElementById('prata');
+            const bronzeInput = document.getElementById('bronze');
+            const mencaoInput = document.getElementById('mencao');
+            const participacaoInput = document.getElementById('participacao');
+            const updateButton = document.getElementById('updateButton');
+    
+            const competitionsRef = firebase.database().ref('competicao');
+            competitionsRef.on('value', snapshot => {
+                const competitions = snapshot.val();
+                selectCompetition.innerHTML = '<option value="">Selecione...</option>';
+                for (let id in competitions) {
+                    const comp = competitions[id];
+                    const option = document.createElement('option');
+                    option.value = id;
+                    option.textContent = comp.nome + " " + comp.edicao;
+                    selectCompetition.appendChild(option);
+                }
+            });
+    
+            selectCompetition.addEventListener('change', function () {
+                const selectedId = this.value;
+                if (selectedId) {
+                    const selectedCompRef = firebase.database().ref('competicao/' + selectedId);
+                    selectedCompRef.once('value').then(snapshot => {
+                        const comp = snapshot.val();
+                        nomeInput.value = comp.nome;
+                        siglaInput.value = comp.sigla;
+                        edicaoInput.value = comp.edicao;
+                        ouroInput.value = comp.quantMedalhaOuro;
+                        prataInput.value = comp.quantMedalhaPrata;
+                        bronzeInput.value = comp.quantMedalhaBronze;
+                        mencaoInput.value = comp.quantMencaoHonrosa;
+                        participacaoInput.value = comp.quantMedalhaParticipacao;
+    
+                        nomeInput.disabled = false;
+                        siglaInput.disabled = false;
+                        edicaoInput.disabled = false;
+                        ouroInput.disabled = false;
+                        prataInput.disabled = false;
+                        bronzeInput.disabled = false;
+                        mencaoInput.disabled = false;
+                        participacaoInput.disabled = false;
+                        updateButton.disabled = false;
+                    });
+                } else {
+                    nomeInput.value = '';
+                    siglaInput.value = '';
+                    edicaoInput.value = '';
+                    ouroInput.value = '';
+                    prataInput.value = '';
+                    bronzeInput.value = '';
+                    mencaoInput.value = '';
+                    participacaoInput.value = '';
+    
+                    nomeInput.disabled = true;
+                    siglaInput.disabled = true;
+                    edicaoInput.disabled = true;
+                    ouroInput.disabled = true;
+                    prataInput.disabled = true;
+                    bronzeInput.disabled = true;
+                    mencaoInput.disabled = true;
+                    participacaoInput.disabled = true;
+                    updateButton.disabled = true;
+                }
+            });
+    
+            document.getElementById('updateCompetition').addEventListener('submit', function (event) {
+                event.preventDefault();
+    
+                const selectedId = selectCompetition.value;
+                const updatedComp = {
+                    nome: nomeInput.value,
+                    sigla: siglaInput.value,
+                    edicao: edicaoInput.value,
+                    quantMedalhaOuro: ouroInput.value,
+                    quantMedalhaPrata: prataInput.value,
+                    quantMedalhaBronze: bronzeInput.value,
+                    quantMencaoHonrosa: mencaoInput.value,
+                    quantMedalhaParticipacao: participacaoInput.value
+                };
+    
+                if (selectedId) {
+                    const updateRef = firebase.database().ref('competicao/' + selectedId);
+                    updateRef.update(updatedComp).then(() => {
+                        window.location.href = 'index.html'; 
+                    }).catch(error => {
+                        console.error('Erro ao atualizar competição:', error);
+                    });
+                }
+            });
+        });
+    </script>
+       
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="js/sb-admin-2.min.js"></script>
+    <script src="vendor/chart.js/Chart.min.js"></script>
+    <script src="js/demo/chart-pie-demo.js"></script>
+</body>
+</html>
