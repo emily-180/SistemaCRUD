@@ -23,7 +23,7 @@
             } else if (email === adminEmail && password === adminPassword) {
                 // Verifica as credenciais
                 sessionStorage.setItem('loggedIn', 'true');
-                window.location.href = 'index.html'; 
+                window.location.href = 'home.html'; 
 
             } else {
                 // Caso as credenciais estejam incorretas

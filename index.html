@@ -7,243 +7,89 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Sistema Clube da Matematica - Visão Geral</title>
+
+    <title>Clube da Matemática </title>
+
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="logout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
 
-
-    
-    <script>
-        window.onload = function() {
-            displayCompetitions();
-        };
-    </script>
     <style>
-        
-        .competition-table {
-            width: 100%;
-            margin-bottom: 2rem;
-            border-collapse: collapse;
+        body {
+            background-color: #2e2e2e; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-
-        .competition-table th,
-        .competition-table td {
-            padding: 1rem;
-            text-align: left;
+        .bg-login-image {
+            background: url('img/Clube da Matematica.png');
+            background-size: cover;
+            border-radius: 0.8rem;
         }
-
-        .competition-table th {
-            background-color:#ffc107;
-            color: rgb(0, 0, 0);
+        .btn-custom {
+            background-color: #ffc107; 
+            color: #000; 
         }
-
-        .competition-table tr:nth-child(even) {
-            background-color: #f8f9fc;
-        }
-
-        .competition-table tr:nth-child(odd) {
-            background-color: #e9ecef;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .preto{
-            color:black;
+        .text-custom {
+            color: #ffc107; 
         }
     </style>
 </head>
 
-<body id="page-top">
-    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
-    <script src="app.js"></script>
-    <div id="wrapper">
+<body>
 
-        <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                  
-                </div>
-                <div class="sidebar-brand-text mx-3">Adm Clube da Matematica<sup>2</sup></div>
-            </a>
-
-            <hr class="sidebar-divider my-0">
-
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fa-brands fa-readme"></i>
-                    <span>Visão Geral</span></a>
-            </li>
-
-            <hr class="sidebar-divider">
-
-            <div class="sidebar-heading">
-                Gerenciar
-            </div>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponents" aria-expanded="true" aria-controls="collapseComponents">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Competições</span>
-                </a>
-                <div id="collapseComponents" class="collapse" aria-labelledby="headingComponents" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Funções Permitidas</h6>
-                        <a class="collapse-item" href="add-competition.html">Adicionar Competição</a>
-                        <a class="collapse-item" href="edit-competition.html">Editar Competicição</a>
-                    </div>
-                </div>
-            </li>
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+    <div class="container">
         
-        <div id="content-wrapper" class="d-flex flex-column">
+        <div class="row justify-content-center">
 
+            <div class="col-xl-10 col-lg-12 col-md-9">
 
-            <div id="content">
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <ul class="navbar-nav ml-auto">                
-                        <div class="topbar-divider d-none d-sm-block"></div>
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
-                            </a>
-                            
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" id="logoutButton">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Sair
-                                </a>
-                                
-                            </div>
-                        </li>
-                    </ul>
-                
-                </nav>
-             
-                <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Quadro de Premiações</h1>
-                    </div>                
-
-                    <div class="row">
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-warning preto shadow">
-                                <div class="card-body ">
-                                    Total de Medalhas de Ouro: <span id="totalOuro">0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-secondary text-white shadow">
-                                <div class="card-body " >
-                                    Total de Medalhas de Prata: <span id="totalPrata">0</span>
-                                </div>
-                            </div>
-                        </div>                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-dark text-white shadow">
-                                <div class="card-body">
-                                    Total de Medalhas de Bronze: <span id="totalBronze">0</span>
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                            <div class="col-lg-6">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-custom mb-4" style="font-weight: bold;">Sistema ADM do Site</h1>
+                                    </div>
+                                    <form class="user" onsubmit="return login()">
+                                        <div class="form-group">
+                                            <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Endereço de Email...">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Senha">
+                                        </div>
+                                        <div class="form-group">
+                                            <hr>
+                                        </div>
+                                        <button type="submit" class="btn btn-custom btn-user btn-block">
+                                            Login
+                                        </button>
+                                    </form>
+                                    <hr>
+                                    
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 mb-3">
-                            <div class="card bg-gradient-success text-white shadow">
-                                <div class="card-body ">
-                                    Total de Medalhas de Participação: <span id="totalParticipacao">0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-3">
-                            <div class="card bg-gradient-info text-white shadow">
-                                <div class="card-body " >
-                                    Total de Menções Honrosas: <span id="totalMencao">0</span>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Visão Geral - Competições</h1>
-                    </div>
-                  
-                   <div class="table-responsive">
-                        <table class="competition-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome da Competição</th>
-                                    <th>Sigla</th>
-                                    <th>Edição</th>                                    
-                                    <th>Quantidade de Medalhas</th>
-                                    <th>Outras Premiações</th>
-                                    <th>Ação</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                            </tbody>
-                        </table>                            
-                    </div>
-
-                   
-
                 </div>
-               
+
             </div>
-          
+
         </div>
-      
+
     </div>
-  
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-    
-    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmação de Exclusão</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            Você tem certeza que deseja excluir esta competição? Esta ação não pode ser desfeita.
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
-            </div>
-        </div>
-        </div>
-    </div>
-    
+
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="login.js"></script>
 
 </body>
+
 </html>

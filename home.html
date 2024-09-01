@@ -7,46 +7,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Sistema Clube da Matematica - Adicionar</title>
+    <title>Sistema Clube da Matematica - Visão Geral</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="logout.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+    
+    <script>
+        window.onload = function() {
+            displayCompetitions();
+        };
+    </script>
     <style>
-        .form-container {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            margin-top: 2rem;
-        }
-        .form-container h2 {
-            margin-bottom: 1rem;
-            color: #ffc107;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select {
+        
+        .competition-table {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
+            margin-bottom: 2rem;
+            border-collapse: collapse;
         }
 
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #ffc107;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
+        .competition-table th,
+        .competition-table td {
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .competition-table th {
+            background-color:#ffc107;
+            color: rgb(0, 0, 0);
+        }
+
+        .competition-table tr:nth-child(even) {
+            background-color: #f8f9fc;
+        }
+
+        .competition-table tr:nth-child(odd) {
+            background-color: #e9ecef;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .preto{
+            color:black;
         }
     </style>
 </head>
@@ -129,51 +138,74 @@
                 </nav>
              
                 <div class="container-fluid">
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Quadro de Premiações</h1>
+                    </div>                
 
-                    <div class="form-container">
-                        <h2>Adicionar Competição</h2>
-                        <form id="addCompetitionForm">
-                            <div class="form-group">
-                                <label for="nome">Nome da Competição</label>
-                                <input type="text" class="form-control" id="nome" placeholder="Ex: Olimpíada Brasileira de Matemática das Escolas Públicas" required>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="sigla">Sigla</label>
-                                    <input type="text" class="form-control" id="sigla" placeholder="Ex: OBMEP" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="edicao">Edição</label>
-                                    <input type="text" class="form-control" id="edicao" placeholder="Ex: 2023" required>
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-gradient-warning preto shadow">
+                                <div class="card-body ">
+                                    Total de Medalhas de Ouro: <span id="totalOuro">0</span>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="ouro">Quantidade de Menções Honrosas</label>
-                                    <input type="number" class="form-control" id="mencao" placeholder="Ex: 4" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="prata">Quantidade de Medalhas de Participação</label>
-                                    <input type="number" class="form-control" id="participacao" placeholder="Ex: 6" required>
+                        </div>
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-gradient-secondary text-white shadow">
+                                <div class="card-body " >
+                                    Total de Medalhas de Prata: <span id="totalPrata">0</span>
                                 </div>
                             </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-4">
-                                    <label for="ouro">Quantidade de Medalhas de Ouro</label>
-                                    <input type="number" class="form-control" id="ouro" placeholder="Ex: 12" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="prata">Quantidade de Medalhas de Prata</label>
-                                    <input type="number" class="form-control" id="prata" placeholder="Ex: 8" required>
-                                </div>
-                                <div class="form-group col-md-4">
-                                    <label for="bronze">Quantidade de Medalhas de Bronze</label>
-                                    <input type="number" class="form-control" id="bronze" placeholder="Ex: 5" required>
+                        </div>                        
+                        <div class="col-lg-4 mb-4">
+                            <div class="card bg-gradient-dark text-white shadow">
+                                <div class="card-body">
+                                    Total de Medalhas de Bronze: <span id="totalBronze">0</span>
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-warning">Adicionar Competição</button>
-                        </form>
+                        </div>
                     </div>
+                    <div class="row">
+                        <div class="col-lg-6 mb-3">
+                            <div class="card bg-gradient-success text-white shadow">
+                                <div class="card-body ">
+                                    Total de Medalhas de Participação: <span id="totalParticipacao">0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-3">
+                            <div class="card bg-gradient-info text-white shadow">
+                                <div class="card-body " >
+                                    Total de Menções Honrosas: <span id="totalMencao">0</span>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>
+
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Visão Geral - Competições</h1>
+                    </div>
+                  
+                   <div class="table-responsive">
+                        <table class="competition-table">
+                            <thead>
+                                <tr>
+                                    <th>Nome da Competição</th>
+                                    <th>Sigla</th>
+                                    <th>Edição</th>                                    
+                                    <th>Quantidade de Medalhas</th>
+                                    <th>Outras Premiações</th>
+                                    <th>Ação</th> 
+                                </tr>
+                            </thead>
+                            <tbody>
+                               
+                            </tbody>
+                        </table>                            
+                    </div>
+
+                   
+
                 </div>
                
             </div>
@@ -185,46 +217,33 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <script>
-        document.getElementById('addCompetitionForm').addEventListener('submit', function(event) {
-            event.preventDefault();
     
-            const nome = document.getElementById('nome').value;
-            const sigla = document.getElementById('sigla').value;
-            const edicao = document.getElementById('edicao').value;
-            const ouro = document.getElementById('ouro').value;
-            const prata = document.getElementById('prata').value;
-            const bronze = document.getElementById('bronze').value;
-            const mencao = document.getElementById('mencao').value;
-            const participacao = document.getElementById('participacao').value;
-
-            
-            createCompetition(nome, sigla, edicao, ouro, prata, bronze, mencao, participacao).then(() => {
-                
-                document.getElementById('nome').value = '';
-                document.getElementById('sigla').value = '';
-                document.getElementById('edicao').value = '';
-                document.getElementById('ouro').value = '';
-                document.getElementById('prata').value = '';
-                document.getElementById('bronze').value = '';
-                document.getElementById('mencao').value = '';
-                document.getElementById('participacao').value = '';
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmação de Exclusão</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            Você tem certeza que deseja excluir esta competição? Esta ação não pode ser desfeita.
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
+            </div>
+        </div>
+        </div>
+    </div>
     
-                
-                window.location.href = 'home.html';
-            }).catch(error => {
-                console.error('Erro ao adicionar a competição:', error);
-            });
-        });
-    </script>
-    
-   
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
 </body>
 </html>

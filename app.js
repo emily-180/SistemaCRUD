@@ -101,7 +101,7 @@
         competitionsRef.push(newCompetition)
             .then(() => {
                 document.getElementById('addCompetitionForm').reset();
-                window.location.href = 'index.html';
+                window.location.href = 'home.html';
             })
             .catch(error => console.error('Erro ao adicionar competição: ', error));
     };
@@ -123,7 +123,7 @@
 
     window.logout = function () {
         localStorage.clear();
-        window.location.href = 'login.html';
+        window.location.href = 'index.html';
     };
 
     
