@@ -11,10 +11,71 @@
     firebase.initializeApp(firebaseConfig);
 
     const database = firebase.database();
+    let bolsistaIdToDelete = null;
+
+    window.displayBolsista = function () {
+        const bolsistaRef = database.ref('usersAdm');
+        bolsistaRef.on('value', snapshot => {
+            const bolsistas = snapshot.val();
+            const tableBody = document.querySelector('.bolsista-table tbody');
+            tableBody.innerHTML = ''; 
+
+            for (let id in bolsistas) {
+                const b = bolsistas[id];
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="preto">${b.nome}</td>
+                    <td class="preto">${b.login}</td>
+                    <td class="preto">
+                        <button class="btn btn-danger btn-sm" onclick="confirmeDelete('${id}')">Excluir</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            }
+        });
+    };
+
+    window.confirmeDelete = function (id) {
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteBolsista(id);
+            }
+        });
+    };
     
-    let competitionIdToDelete = null;
+    window.deleteBolsista = function (id) {
+        const bolsistaRef = database.ref('usersAdm/' + id);
+        bolsistaRef.remove()
+            .then(() => {
+                Swal.fire(
+                    'Excluído!',
+                    'O bolsista foi excluído.',
+                    'success'
+                );
+                displayBolsista(); // Atualiza a lista após a exclusão
+            })
+            .catch((error) => {
+                Swal.fire(
+                    'Erro!',
+                    'Ocorreu um erro ao tentar excluir o bolsista.',
+                    'error'
+                );
+                console.error('Erro ao excluir o bolsista:', error);
+            });
+    };
     
 
+    let competitionIdToDelete = null;
+   
     window.displayCompetitions = function () {
         const competitionsRef = database.ref('competicao');
         competitionsRef.on('value', snapshot => {

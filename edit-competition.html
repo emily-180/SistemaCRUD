@@ -11,44 +11,8 @@
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <style>
-        .form-container {
-            background-color: #fff;
-            padding: 2rem;
-            border-radius: 0.5rem;
-            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-            margin-top: 2rem;
-        }
-        .form-container h2 {
-            margin-bottom: 1rem;
-            color: #ffc107;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ced4da;
-            border-radius: 0.25rem;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            border-color: #ffc107;
-            outline: none;
-            box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
-        }
-    </style>
+    <link href="styles/styleForms.css" rel="stylesheet">
+    <script src="checkLogin.js"></script>
 </head>
 
 <body id="page-top">
@@ -63,7 +27,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                   
                 </div>
-                <div class="sidebar-brand-text mx-3">Adm Clube da Matematica<sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">Sistema Clube da Matematica<sup>2</sup></div>
             </a>
 
             <hr class="sidebar-divider my-0">
@@ -94,7 +58,20 @@
                 </div>
             </li>
             <hr class="sidebar-divider d-none d-md-block">
-
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseComponent" aria-expanded="true" aria-controls="collapseComponent">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Bolsistas</span>
+                </a>
+                <div id="collapseComponent" class="collapse" aria-labelledby="headingComponent" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Funções Permitidas</h6>
+                        <a class="collapse-item" href="add-bolsista.html">Adicionar Bolsista</a>
+                        <a class="collapse-item" href="lista-bolsista.html">Ver Bolsistas</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider d-none d-md-block">
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
@@ -111,8 +88,8 @@
                         <div class="topbar-divider d-none d-sm-block"></div>
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Administrador</span>
-                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Opções</span>
+                                <img class="img-profile rounded-circle" src="img/user.png">
                             </a>
                             
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -296,5 +273,7 @@
     <script src="js/sb-admin-2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="logout.js"></script>
 </body>
 </html>

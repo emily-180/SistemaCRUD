@@ -7,61 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Sistema Clube da Matematica - Visão Geral</title>
+    <title>Sistema Clube da Matematica - Adicionar</title>
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <script src="logout.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>    
-    <script src="checkLogin.js"></script>
-    <script>
-        window.onload = function() {
-            displayCompetitions();
-        };
-    </script>
-    <style>
-        
-        .competition-table {
-            width: 100%;
-            margin-bottom: 2rem;
-            border-collapse: collapse;
-        }
+    <link href="styles/styleForms.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        .competition-table th,
-        .competition-table td {
-            padding: 1rem;
-            text-align: left;
-        }
-
-        .competition-table th {
-            background-color:#ffc107;
-            color: rgb(0, 0, 0);
-        }
-
-        .competition-table tr:nth-child(even) {
-            background-color: #f8f9fc;
-        }
-
-        .competition-table tr:nth-child(odd) {
-            background-color: #e9ecef;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-        .preto{
-            color:black;
-        }
-    </style>
 </head>
 
 <body id="page-top">
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
-    <script src="app.js"></script>
+    <script src="app.js"></script> 
+    <script src="checkPermissao.js"></script>
     <div id="wrapper">
 
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -149,74 +108,28 @@
                 </nav>
              
                 <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Quadro de Premiações</h1>
-                    </div>                
 
-                    <div class="row">
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-warning preto shadow">
-                                <div class="card-body ">
-                                    Total de Medalhas de Ouro: <span id="totalOuro">0</span>
+                    <div class="form-container">
+                        <h2>Adicionar Bolsista</h2>
+                        <form id="addAdminForm">
+                            <div class="form-group">
+                                <label for="nomeNovoAdm">Nome</label>
+                                <input type="text" class="form-control" id="nomeNovoAdm" placeholder="Ex: Fulano da Silva" required>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-lg-6">
+                                    <label for="usernameNovoAdm">Email de login</label>
+                                    <input type="text" class="form-control" id="usernameNovoAdm" placeholder="Ex: fulanodasilva@gmail.com" required>
+                                </div>
+                                <div class="form-group col-lg-6">
+                                    <label for="senhaNovoAdm">Senha</label>
+                                    <input type="password" class="form-control" id="senhaNovoAdm" placeholder="Ex: xxxxxxxxxx" required>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-secondary text-white shadow">
-                                <div class="card-body " >
-                                    Total de Medalhas de Prata: <span id="totalPrata">0</span>
-                                </div>
-                            </div>
-                        </div>                        
-                        <div class="col-lg-4 mb-4">
-                            <div class="card bg-gradient-dark text-white shadow">
-                                <div class="card-body">
-                                    Total de Medalhas de Bronze: <span id="totalBronze">0</span>
-                                </div>
-                            </div>
-                        </div>
+                            <button type="submit" class="btn btn-warning">Adicionar Bolsista</button>
+                        </form>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-6 mb-3">
-                            <div class="card bg-gradient-success text-white shadow">
-                                <div class="card-body ">
-                                    Total de Medalhas de Participação: <span id="totalParticipacao">0</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 mb-3">
-                            <div class="card bg-gradient-info text-white shadow">
-                                <div class="card-body " >
-                                    Total de Menções Honrosas: <span id="totalMencao">0</span>
-                                </div>
-                            </div>
-                        </div>   
-                    </div>
-
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Visão Geral - Competições</h1>
-                    </div>
-                  
-                   <div class="table-responsive">
-                        <table class="competition-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome da Competição</th>
-                                    <th>Sigla</th>
-                                    <th>Edição</th>                                    
-                                    <th>Quantidade de Medalhas</th>
-                                    <th>Outras Premiações</th>
-                                    <th>Ação</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                            </tbody>
-                        </table>                            
-                    </div>
-
-                   
-
+                    
                 </div>
                
             </div>
@@ -228,33 +141,45 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
+
+    <script>
+        document.getElementById('addAdminForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById('nomeNovoAdm').value;
+        const login = document.getElementById('usernameNovoAdm').value;
+        const senha = document.getElementById('senhaNovoAdm').value;
+
+        createAdminUser(nome, login, senha).then(() => {
+            document.getElementById('nomeNovoAdm').value = '';
+            document.getElementById('usernameNovoAdm').value = '';
+            document.getElementById('senhaNovoAdm').value = '';
+            window.location.href = 'lista-bolsista.html';
+                }).catch(error => {
+                    console.error('Erro ao adicionar o administrador:', error);
+                });
+        });
+
+        function createAdminUser(nome, login, senha) {
+            const userId = firebase.database().ref().child('usersAdm').push().key;
+            const newUserData = {
+                nome: nome,
+                login: login,
+                senha: senha,
+                isPermitido : false
+            };
+            return firebase.database().ref('usersAdm/' + userId).set(newUserData);
+        }
+
+    </script>
     
-    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirmação de Exclusão</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-            <div class="modal-body">
-            Você tem certeza que deseja excluir esta competição? Esta ação não pode ser desfeita.
-            </div>
-            <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Excluir</button>
-            </div>
-        </div>
-        </div>
-    </div>
-    
+   
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="js/sb-admin-2.min.js"></script>
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
-
+    <script src="logout.js"></script>
 </body>
 </html>
