@@ -11,6 +11,43 @@
     firebase.initializeApp(firebaseConfig);
 
     const database = firebase.database();
+
+    function formatarDataHoraLocal() {
+        const data = new Date();
+        
+        return data.toLocaleString('pt-BR', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false 
+        });
+    }
+
+    function registrarAuditoria(acao, detalhes) {
+        const database = firebase.database();
+        const auditoriaRef = database.ref('auditoria');
+    
+        const log = {
+            nome: sessionStorage.getItem('userEmail'), 
+            acao: acao,
+            data: formatarDataHoraLocal(), 
+            detalhes: detalhes
+        };
+    
+        auditoriaRef.push(log)
+            .then(() => {
+                console.log('Log de auditoria registrado com sucesso.');
+            })
+            .catch(error => {
+                console.error('Erro ao registrar log de auditoria:', error);
+            });
+    }
+    
+
+    
     let bolsistaIdToDelete = null;
 
     window.displayBolsista = function () {
@@ -61,7 +98,7 @@
                     'O bolsista foi excluído.',
                     'success'
                 );
-                displayBolsista(); // Atualiza a lista após a exclusão
+                displayBolsista(); 
             })
             .catch((error) => {
                 Swal.fire(
@@ -123,29 +160,57 @@
         });
     };
     
+   
     window.confirmDelete = function (id) {
         competitionIdToDelete = id;
-        $('#deleteConfirmationModal').modal('show');
+        Swal.fire({
+            title: 'Tem certeza?',
+            text: "Você não poderá reverter isso!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, excluir!',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                deleteCompetition();
+            }
+        });
     };
-
+    
+    
     window.deleteCompetition = function () {
         if (competitionIdToDelete) {
             const competitionRef = database.ref('competicao/' + competitionIdToDelete);
-            competitionRef.remove()
-                .then(() => {
-                    console.log('Competição deletada com sucesso');
-                    $('#deleteConfirmationModal').modal('hide'); 
-                    displayCompetitions(); 
-                    competitionIdToDelete = null;
+            competitionRef.once('value')
+                .then(snapshot => {
+                    const competition = snapshot.val();
+                    const competitionName = competition ? competition.nome : 'Desconhecido';
+    
+                    return competitionRef.remove().then(() => {
+                        registrarAuditoria('Exclusão', `Competição "${competitionName}" excluída`);
+                        $('#deleteConfirmationModal').modal('hide');
+                        displayCompetitions();
+                        competitionIdToDelete = null;
+                    });
                 })
-                .catch(error => console.error('Erro ao deletar competição: ', error));
+                .catch(error => {
+                    console.error('Erro ao deletar competição: ', error);
+                    Swal.fire(
+                        'Erro!',
+                        'Ocorreu um erro ao tentar excluir a competição.',
+                        'error'
+                    );
+                });
         }
     };
-
+    
+    
     document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('confirmDeleteBtn').addEventListener('click', deleteCompetition);
     });
-
+    
      window.createCompetition = function (nome, sigla, edicao, ouro, prata, bronze, mencao, participacao) {
         const newCompetition = {
             nome: nome,
@@ -161,6 +226,10 @@
         const competitionsRef = database.ref('competicao');
         competitionsRef.push(newCompetition)
             .then(() => {
+                registrarAuditoria(
+                    'Adicionado',
+                    `Competição "${nome}", edição ${edicao}`
+                );
                 document.getElementById('addCompetitionForm').reset();
                 window.location.href = 'home.html';
             })

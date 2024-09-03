@@ -1,0 +1,34 @@
+.tableAuditoria {
+    width: 100%;
+    margin-bottom: 2rem;
+    border-collapse: collapse;
+}
+
+.tableAuditoria th,
+.tableAuditoria td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.tableAuditoria th {
+    background-color: #ffc107;
+    color: rgb(0, 0, 0);
+}
+
+.tableAuditoria tr:nth-child(even) {
+    background-color: #f8f9fc;
+}
+
+.tableAuditoria tr:nth-child(odd) {
+    background-color: #e9ecef;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.preto {
+    color: black;
+}

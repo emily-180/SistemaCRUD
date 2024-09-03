@@ -16,18 +16,14 @@
     <script src="logout.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="checkPermissao.js"></script>
-    <link href="styles/styleTableBolsista.css" rel="stylesheet">
-    <script>
-        window.onload = function() {
-            displayBolsista();
-        };
-    </script>
+    <link href="styles/styleTableAuditoria.css" rel="stylesheet">
+
 </head>
 
 <body id="page-top">
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-database.js"></script>
-   
+    <script src="auditoria.js"></script>
     <div id="wrapper">
 
         <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -127,28 +123,26 @@
                 </nav>
              
                 <div class="container-fluid">
-                   <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Lista de Administrador e Bolsistas</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Auditoria</h1>
                     </div>
-                  
-                   <div class="table-responsive">
-                        <table class="bolsista-table">
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Email</th>
-                                    <th>Ação</th> 
-                                </tr>
-                            </thead>
-                            <tbody>
-                               
-                            </tbody>
-                        </table>                            
-                    </div>
-
-                   
-
+                
+                    <table class="tableAuditoria" id="tabelaAuditoria">
+                        <thead>
+                            <tr>
+                                <th>Ação</th>
+                                <th>Detalhes</th>
+                                <th>Usuário</th>
+                                <th>Data e Hora</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                    </table>
+                    
                 </div>
+                
                
             </div>
           
@@ -167,6 +161,7 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
     <script src="app.js"></script>
+    
 
 </body>
 </html>
