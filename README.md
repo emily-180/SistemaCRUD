@@ -11,9 +11,12 @@ Este sistema foi desenvolvido para gerenciar as premiações de matemática dos 
 
 ## 📌 Funcionalidades  
 
-✔️ Cadastro e atualização de bolsistas (que podem acessar o site e atualizar informações)
+✔️ Cadastro e atualização de bolsistas(que podem acessar o site e atualizar informações)
+
 ✔️ Registro e atualização de premiações  
+
 ✔️ Listagem e consulta de premiações  
+
 ✔️ Auditoria das ações realizadas no site
 
 ## 🖥️ Tela de Login  
