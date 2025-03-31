@@ -23,6 +23,6 @@ A aplicação conta com um **sistema de autenticação** que impede acessos não
 - **Validação de campos obrigatórios**  
 - **Mensagem de erro para credenciais incorretas**  
 
-![Tela de Login](caminho/para/sua/imagem.png)  
+![Tela de Login](FotoSistema/telainicial.png)  
 
 Tela de login (possue verificação de campos vazios e lohins incorretos)
