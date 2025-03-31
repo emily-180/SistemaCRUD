@@ -7,7 +7,7 @@ Este sistema foi desenvolvido para gerenciar as premiações de matemática dos 
 - **HTML** → Estrutura da aplicação  
 - **CSS** → Estilização e layout responsivo  
 - **JavaScript** → Funcionalidades dinâmicas  
-- **Firebase** → Banco de dados e autenticação  
+- **Firebase** → Banco de dados  
 
 ## 📌 Funcionalidades  
 
