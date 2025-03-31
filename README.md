@@ -25,4 +25,16 @@ A aplicação conta com um **sistema de autenticação** que impede acessos não
 
 ![Tela de Login](FotoSistema/telainicial.png)  
 
-Tela de login (possue verificação de campos vazios e lohins incorretos)
+## 🖥️ Tela Principal  
+
+A aplicação conta com uma **visão geral intuitiva**, onde é possível:  
+
+- Visualizar o **quadro de premiações**, exibindo o **total de premiações** e a **quantidade de cada colocação**.  
+- Consultar a **lista de competições cadastradas**, com opções para **editar** ou **excluir** cada uma.  
+- Navegar facilmente pelo **menu lateral**, que contém acessos rápidos para:  
+  - **🏆 Competições**  
+  - **🎓 Bolsistas**  
+  - **📊 Auditoria**  
+
+📸 **Tela Principal:**  
+![Tela Principal](FotoSistema/telaprincipal.png)  
