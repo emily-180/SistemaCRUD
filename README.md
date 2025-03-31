@@ -21,8 +21,9 @@ Este sistema foi desenvolvido para gerenciar as premiações de matemática dos 
 A aplicação conta com um **sistema de autenticação** que impede acessos não autorizados. A tela de login inclui:  
 
 - **Validação de campos obrigatórios**  
-- **Mensagem de erro para credenciais incorretas**  
+- **Mensagem de erro para credenciais incorretas**
 
+📸 **Tela de Login**  
 ![Tela de Login](FotoSistema/telainicial.png)  
 
 ## 🖥️ Tela Principal  
